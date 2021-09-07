@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class RegisterController extends Controller{
+
+
+
+
+
     public function addPerson(Request $request){
         $validator=Validator::make($request->all(), [
                 'name' => 'required|min:2|max:45',
@@ -52,8 +57,8 @@ class RegisterController extends Controller{
                      if(Hash::check(request('mPassword'), $checkInfo->password)){
                         $request->session()->put('data', $checkInfo);
                         $data = $request->session()->get("data");
-                        //compact($data);
-                        return redirect('/profil');
+                        // dd($data['name']);
+                        return redirect('/');
                      }else{
                         $validator->after(function ($validator) use($checkInfo,$request){
                             $validator->errors()->add('mPassword', 'Your password is not valid');

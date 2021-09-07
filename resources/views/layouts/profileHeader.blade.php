@@ -35,7 +35,7 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
-	<div class="span6">Welcome!<strong>Guest</strong></div>
+	<div class="span6">Welcome!<strong> User</strong></div>
 	<div class="span6">
 	<div class="pull-right">
 		<a href="product_summary.html"><span class="">Fr</span></a>
@@ -75,43 +75,7 @@
 	 <li class=""><a href="normal.html">Delivery</a></li>
 	 <li class=""><a href="contact.html">Contact</a></li>
 	 <li class="">
-	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-	@if($errors->has('mEmail') || $errors->has('mPassword'))
-	<div id="login" class="modal  fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-	@else;
-	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-	@endif
-	 
-		  <div class="modal-header">
-			<button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Login Block</h3>
-		  </div>
-		  <div class="modal-body">
-			<form class="form-horizontal loginFrm" action="{{'/'}}" method="post">
-				@csrf
-			  <div class="control-group">								
-				<input type="text" id="inputEmail" placeholder="Email" name="mEmail">
-			  </div>
-			  @if ($errors->has('mEmail'))
-            	<div style="color:red" class="error">{{$errors->first('mEmail')}}</div>
-              @endif
-			  <div class="control-group">
-				<input type="password" id="inputPassword" placeholder="Password" name="mPassword">
-			  </div>
-			  @if ($errors->has('mPassword'))
-            	<div style="color:red" class="error">{{$errors->first('mPassword')}}</div>
-              @endif
-			  <div class="control-group">
-				<label class="checkbox">
-				<input type="checkbox"> Remember me
-				</label>
-			  </div>
-			  <button class="btn btn-success">Sign in</button>
-			</form>		
-			
-			<button class="btn modalClose" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
-	</div>
+	 <a href="" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Log Out</span></a>
 	</li>
     </ul>
   </div>
@@ -129,7 +93,6 @@
 				<a href="login.html">ADDRESSES</a> 
 				<a href="login.html">DISCOUNT</a>  
 				<a href="login.html">ORDER HISTORY</a>
-				<a href="{{'/settings'}}">SETTINGS</a>
 			 </div>
 			<div class="span3">
 				<h5>INFORMATION</h5>

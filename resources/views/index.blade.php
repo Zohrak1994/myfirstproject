@@ -2,6 +2,7 @@
 @section('title','Home')
 @section('body')
 <!-- Header End====================================================================== -->
+
 <div id="carouselBlk">
 	<div id="myCarousel" class="carousel slide">
 		<div class="carousel-inner">
