@@ -80,35 +80,48 @@
                 <label class="control-label" for="input01">Product Name</label>
                 <div class="controls">
                   <input type="text" class="input-xlarge" id="input01" name="name">
-
+                  @if ($errors->has('name'))
+            	<div style="color:red">{{$errors->first('name')}}</div>
+              @endif
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="input11">Count</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="input11"  name="count">
-
+                  <input type="number" class="input-xlarge" id="input11"  name="count">
+                  @if ($errors->has('count'))
+            	<div style="color:red">{{$errors->first('count')}}</div>
+              @endif
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="Price">Price</label>
                 <div class="controls">
-                  <input type="text" class="input-xlarge" id="Price"  name="price">
-
+                  <input type="number" class="input-xlarge" id="Price"  name="price">
+                  @if ($errors->has('price'))
+            	<div style="color:red">{{$errors->first('price')}}</div>
+              @endif
                 </div>
               </div>
                <div class="control-group">
                 <label class="control-label" for="forInp">Images</label>
-                
                 <div class="controls">
                 <label class="control-label btn " style="width: 90px" for="Images" id="forInp" >Select images</label>
                   <input type="file" class="hidden" id="Images"  name="images[]" accept="image/*" multiple>
+                  @if ($errors->has('images'))
+            	<div style="color:red">{{$errors->first('images')}}</div>
+              @endif
                 </div>
+
               </div>
+
               <div class="control-group">
                 <label class="control-label" for="textarea">Description</label>
                 <div class="controls">
                   <textarea class="input-xlarge" id="textarea" rows="3" style="height:65px"  name="description"></textarea>
+                  @if ($errors->has('description'))
+            	<div style="color:red">{{$errors->first('description')}}</div>
+              @endif 
                 </div>
               </div>
 
@@ -122,9 +135,13 @@
                         @foreach ($categories as $category)
                         <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                          @endforeach
+
                     </select>
                   </div>
-                </div>
+                  @if ($errors->has('category'))
+            	<div style="color:red">{{$errors->first('category')}}</div>
+              @endif 
+                </div> 
               </div>
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary">Save changes</button>
