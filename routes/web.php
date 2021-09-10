@@ -7,7 +7,6 @@ use App\Http\Controllers\ProductController;
 
 
 Route::get('/', function () {
-    // dd()
     return view('index');
 });
 Route::get('/register', function () {
@@ -17,7 +16,6 @@ Route::get('/settings', function () {
     return view('settings');
 });
 Route::get('/login', function () {
-    // dd()
     return view('login');
 });
 Route::post('/settings', [RegisterController::class, 'update'])->name('settings');
@@ -25,9 +23,10 @@ Route::post('/uppassword', [RegisterController::class, 'uppassword']);
 
 Route::post('/', [RegisterController::class, 'login']);
 Route::post('/register', [RegisterController::class, 'addPerson']);
-Route::get('/add', function () {
-    return view('addProduct');
-});
 Route::get('/add', [ProductController::class, 'showCategories']);
 Route::post('/add', [ProductController::class, 'addProduct']);
 Route::get('/all', [ProductController::class, 'showAllProducts']);
+Route::get('/details/{id}', [ProductController::class, 'details']);
+// Route::get('/details', function () {
+//     return view('product_details');
+// });

@@ -66,41 +66,10 @@ class ProductController extends Controller
     public function showAllProducts(){
         $data = Categories::all();
         $datas =Products::with(['categories','photo'])->get();
-        // $article = \App\Models\Products::with(['user','categories'])->first();
-         return view("allProducts",['datas' => $datas,'data' => $data]);
+        $myproducts =Products::with(['categories','photo'])->where('user_id','=',session()->get("data")->id)->get();
+         return view("allProducts",['datas' => $datas,'data' => $data ,'myproducts' => $myproducts]);
+    }
+    public function details($id){
+        dd($id);
     }
 }
-// DB::table('photos')->select('photos.photo','product_id')
-// ->leftJoin('products', 'products.id', '=', 'photos.product_id')
-// ->groupBy('products.id');
-// $products = DB::table('photos')->select('products.id', 'photos.photo', 'products.name', 'products.description')
-// ->leftJoin('products', 'products.id', '=', 'photos.product_id')
-// // ->groupBy('products.id')
-// ->get();
-// select products.id,  MIN(photos.photo), products.name, products.description 
-// from photos 
-//      left join 
-//      products 
-//      on products.id = photos.product_id 
-// group by products.id
-
-// $this->validate($request, [
-//     'filenames' => 'required',
-//     'filenames.*' => 'mimes:doc,pdf,docx,zip'
-// ]);
-
-
-// if($request->hasfile('filenames'))
-// {
-// foreach($request->file('filenames') as $file)
-// {
-//     $name = time().'.'.$file->extension();
-//     $file->move(public_path().'/files/', $name);  
-//     $data[] = $name;  
-// }
-// }
-
-
-// $file= new File();
-// $file->filenames=json_encode($data);
-// $file->save();
