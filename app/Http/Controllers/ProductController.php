@@ -70,6 +70,8 @@ class ProductController extends Controller
          return view("allProducts",['datas' => $datas,'data' => $data ,'myproducts' => $myproducts]);
     }
     public function details($id){
-        dd($id);
+        $thisproduct =Products::with(['categories','photo'])->where('id','=',$id)->get();
+        // dd($thisproduct);
+        return view("product_details",['thisproduct' => $thisproduct]);
     }
 }
