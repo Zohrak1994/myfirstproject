@@ -1,8 +1,7 @@
 @extends('layouts.header')
 @section('title','Home')
 @section('body')
-{{$thisproduct[0]['photo'][0]['photo']}}
-{{asset('themes/images/products/'.$thisproduct[0]['photo'][0]['photo'])}}
+
 <!-- Header End====================================================================== -->
 <div id="mainBody">
 	<div class="container">
@@ -75,23 +74,21 @@
     <li><a href="products.html">Products</a> <span class="divider">/</span></li>
     <li class="active">product Details</li>
     </ul>	
+
+
 	<div class="row">	  
 			<div id="gallery" class="span3">
-            <a href="{{asset('themes/images/products/large/f1.jpg')}}" title="Fujifilm FinePix S2950 Digital Camera">
-				<img src="{{asset('themes/images/products/large/3.jpg')}}" style="width:100%" alt="Fujifilm FinePix S2950 Digital Camera"/>
+            <a href="{{asset('themes/images/products/'.$thisproduct[0]['photo'][0]['photo'])}}" title="{{$thisproduct[0]['name']}}">
+				<img src="{{asset('themes/images/products/'.$thisproduct[0]['photo'][0]['photo'])}}" style="width:100%" alt="{{$thisproduct[0]['name']}}"/>
             </a>
 			<div id="differentview" class="moreOptopm carousel slide">
-                <div class="carousel-inner">
+			<div class="carousel-inner">
                   <div class="item active">
-                   <a href="{{asset('themes/images/products/large/f1.jpg')}}"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt=""/></a>
-                   <a href="{{asset('themes/images/products/large/f2.jpg')}}"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt=""/></a>
-                   <a href="{{asset('themes/images/products/large/f3.jpg')}}" > <img style="width:29%" src="themes/images/products/large/f3.jpg" alt=""/></a>
-                  </div>
-                  <div class="item">
-                   <a href="{{asset('themes/images/products/large/f3.jpg')}}" > <img style="width:29%" src="themes/images/products/large/f3.jpg" alt=""/></a>
-                   <a href="{{asset('themes/images/products/large/f1.jpg')}}"> <img style="width:29%" src="themes/images/products/large/f1.jpg" alt=""/></a>
-                   <a href="{{asset('themes/images/products/large/f2.jpg')}}"> <img style="width:29%" src="themes/images/products/large/f2.jpg" alt=""/></a>
-                  </div>
+					  @foreach($thisproduct[0]['photo'] as $photo)
+                   <a href="{{asset('themes/images/products/'.$photo['photo'])}}"> <img style="width:29%" src="{{asset('themes/images/products/'.$photo['photo'])}}" alt=""/></a>
+					@endforeach
+				</div>
+
                 </div>
               <!--  
 			  <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
@@ -111,13 +108,13 @@
 			</div>
 			</div>
 			<div class="span6">
-				<h3>Fujifilm FinePix S2950 Digital Camera  </h3>
-				<small>- (14MP, 18x Optical Zoom) 3-inch LCD</small>
+				<h3>{{$thisproduct[0]['name']}}  </h3>
 				<hr class="soft"/>
 				<form class="form-horizontal qtyFrm">
 				  <div class="control-group">
-					<label class="control-label"><span>$222.00</span></label>
+					<label class="control-label"><span>${{$thisproduct[0]['price']}}</span></label>
 					<div class="controls">
+						<label for=""><span> Count: {{$thisproduct[0]['count']}}</span></label>
 					<input type="number" class="span1" placeholder="Qty."/>
 					  <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
 					</div>
@@ -140,12 +137,7 @@
 				  </div>
 				</form>
 				<hr class="soft clr"/>
-				<p>
-				14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. 
-				Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. 
-				Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).
-				
-				</p>
+				<p>{{$thisproduct[0]['description']}}</p>
 				<a class="btn btn-small pull-right" href="#detail">More Details</a>
 				<br class="clr"/>
 			<a href="#" name="detail"></a>

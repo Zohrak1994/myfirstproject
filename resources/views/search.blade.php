@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title','All products')
+@section('title','Home')
 @section('body')
 <!-- Header End====================================================================== -->
 <div id="mainBody">
@@ -72,59 +72,26 @@
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
 		<li class="active">Products Name</li>
     </ul>
-	<h3> Products Name <small class="pull-right"> 40 products are available </small></h3>	
+	<h3> Search results </h3>	
 	<hr class="soft"/>
-	<p>
-		Nowadays the lingerie industry is one of the most successful business spheres.We always stay in touch with the latest fashion tendencies - that is why our goods are so popular and we have a great number of faithful customers all over the country.
-	</p>
-	<hr class="soft"/>
-	<form class="form-horizontal span6">
-		<div class="control-group">
-		  <label class="control-label alignL">Sort By </label>
-			<select>
-              <option>Priduct name A - Z</option>
-              <option>Priduct name Z - A</option>
-              <option>Priduct Stoke</option>
-              <option>Price Lowest first</option>
-            </select>
-		</div>
-	  </form>
+	@if(isset($category))
+		@foreach($category as $cat)
+		<h4>Category {{$cat['name']}} </h4>
+			
+		@endforeach
+	@else
+		<h4> ALL Categories </h4>
+	@endif
 	  
 <div id="myTab" class="pull-right">
  <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i class="icon-list"></i></span></a>
  <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i class="icon-th-large"></i></span></a>
- <a href="#search" data-toggle="tab"><span class="btn btn-large btn-success"><i class="icon-search"></i></i></span></a>
 </div>
 <br class="clr"/>
-
+<hr class="soft"/>
 <div class="tab-content">
-
-
-<div class="tab-pane" id="search">
-		<h1>Search</h1>
-		<div  class="form-horizontal span6" style="width: 100%">
-		<div class="control-group">
-		  <label class="control-label alignL">Search by:</label>
-		  		<div class="" style="display:flex">
-					<input type="number" id="priceStarting">
-					<input type="number" id="priceOver">
-					<button class="search btn btn-success"><i class="icon-search"></i></button>
-				</div>
-		</div>
-		</div>
-		<div class="searchResult"></div>
-
-
-		
-	</div>
-
-
-
-
-
-	<div class="tab-pane" id="listView">
-		<h1>All products</h1>
-		@foreach($datas as $data)
+<div class="tab-pane" id="listView">
+		@foreach($products as $data)
 		<div class="row">	  
 			<div class="span2">
 				<img src="themes/images/products/{{$data['photos'][0]->photo}}" alt=""/>
@@ -160,10 +127,8 @@
 	</div>
 
 	<div class="tab-pane  active" id="blockView">
-		<h1>My products</h1>
 			<ul class="thumbnails">
-			
-			@foreach($myproducts as $data)
+			@foreach($products as $data)
 				<li class="span3">
 				<div class="thumbnail">
 					<a href="{{'/details'}}"><img src="themes/images/products/{{$data['photos'][0]->photo}}" alt=""/></a>
@@ -172,87 +137,31 @@
 					<p> 
 					{{$data['description']}}
 					</p>
-					<h4 style="text-align:center">
-					  <a class="btn" href="{{'/details/'.$data['id']}}"> <i class="icon-zoom-in"></i></a>
-
-					  <button class="addCard btn" data-id="{{$data['id']}}" >Add to <i class="icon-shopping-cart"></i></button>
-					  <button class="addWishlist btn" data-id="{{$data['id']}}">Add to 
-					  		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-  								<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-							</svg>
-					  </button>
-
-					  <a class="btn btn-primary" href="#">${{$data['price']}}</a>
-					  <a href="#{{$data['id']}}" role="button" data-toggle="modal"  style="padding-right:0" ><span class="btn btn-warning " >Edit</span></a>					
-							<div id="{{$data['id']}}" class="modal hide fade in" tabindex="-1" role="dialog" aria-hidden="false" >
-								<div class="modal-header">
-									<button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">×</button>
-									<h3>Modification</h3>
-								</div>
-								<div class="modal-body">
-									<form class="form-horizontal" action="{{'/update'}}" method="post" enctype="multipart/form-data">	
-									
-									@csrf
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="nameproduct">Name:</label>
-											<div class="col-sm-10">							
-												<input class="form-control"  type="text" id="nameproduct" value="{{$data['name']}}" placeholder="Name" name="name">
-											</div>
-										</div>	
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="count">Count:</label>
-											<div class="col-sm-10">	
-												<input class="form-control"  type="number" id="count" value="{{$data['count']}}" placeholder="Count" name="count">
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="price"> Price:</label>
-											<div class="col-sm-10">	
-												<input class="form-control" type="number" id="price" value="{{$data['price']}}" placeholder="Price" name="price">
-											</div>
-										</div>	
-										<div class="form-group">
-											<label class="control-label col-sm-2" for="description"> Description:</label>
-											<div class="col-sm-10">		 
-												<input class="form-control" type="text" id="description" value="{{$data['description']}}" placeholder="Description" name="description">
-											</div>
-										</div>	
-
-										<div class="form-group">
-										<label class="control-label" for="Images">Images</label>
-										<div class="col-sm-10">
-												<label class=" btn form-control"  for="Images" id="forInp" >Select images</label>
-												<input type="file" class="hidden form-control" id="Images"  name="image[]" accept="image/*" multiple>
-											</div>
-
-										</div>
-										<input class="form-control" type="hidden" value="{{$data['id']}}" name="id">	  
-
-									<button class="btn btn-success edit" data-id="{{$data['id']}}">Save</button>
-									</form>		
-									
-									<button class="btn modalClose" data-dismiss="modal" aria-hidden="true">Close</button>
-								</div>
-							</div>
-					
-					  <!-- <button class="btn btn-warning edit" data-id="{{$data['id']}}" href="#">Edit</button> -->
-					  <button class="btn btn-danger delete" data-id="{{$data['id']}}" href="#">Delete</button>
-					</h4>
+					<h4 style="text-align:center"><a class="btn" href="{{'/details/'.$data['id']}}"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">${{$data['price']}}</a></h4>
 					</div>
 				</div>
 				</li>
-			@endforeach
+				@endforeach
 			</ul>
 		<hr class="soft"/>
 	</div>
 </div>
+
 	<a href="compair.html" class="btn btn-large pull-right">Compair Product</a>
 	<div class="pagination">
-	{{$myproducts->links('pagination::bootstrap-4')}}
-
+			<ul>
+			<li><a href="#">&lsaquo;</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">...</a></li>
+			<li><a href="#">&rsaquo;</a></li>
+			</ul>
+			</div>
+			<br class="clr"/>
 </div>
 </div>
 </div>
 </div>
-<!-- MainBody End ============================= -->
 @endsection

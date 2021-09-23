@@ -187,3 +187,34 @@
 <span id="themesBtn"></span>
 </body>
 </html>
+
+@foreach($products as $product)
+                <tr>
+                  <td> <img width="60" src="{{asset('themes/images/products/'. $product['photos'][0]['photo'])}}" alt=""/></td>
+                  <td> {{ $product['name']}}<br/> {{ $product['description']}}</td>
+				  <td>
+					<div class="input-append">
+						<h6 class="span1">Count:{{ $product['carts']->count}}</h6>
+						<button class="btn minus" type="button" data-id="{{ $product['id']}}"><i class="icon-minus"></i></button>
+						<button class="btn plus" type="button" data-id="{{ $product['id']}}"><i class="icon-plus"></i></button>
+						<button class="btn btn-danger deleteCart" type="button" data-id="{{ $product['id']}}"><i class="icon-remove icon-white"></i></button>
+					</div>
+				  </td>
+                  <td colspan="4"> {{ $product['price']}}</td>
+                </tr>
+				@endforeach	
+
+
+                <tr>
+                  <td> <img width="60" src="{{asset('themes/images/products/'. $product['photos'][0]['photo'])}}" alt=""/></td>
+                  <td> {{ $product['name']}}<br/> {{ $product['description']}}</td>
+				  <td>
+					<div class="input-append">
+						<h6 class="span1">Count:{{ $product['carts']->count}}</h6>
+						<button class="btn minus" type="button" data-id="{{ $product['id']}}"><i class="icon-minus"></i></button>
+						<button class="btn plus" type="button" data-id="{{ $product['id']}}"><i class="icon-plus"></i></button>
+						<button class="btn btn-danger deleteCart" type="button" data-id="{{ $product['id']}}"><i class="icon-remove icon-white"></i></button>
+					</div>
+				  </td>
+                  <td colspan="4"> {{ $product['price']}}</td>
+                </tr>

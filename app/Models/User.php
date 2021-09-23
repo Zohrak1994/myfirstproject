@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Models;
-use Eloquent;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use Eloquent;
 class User extends Model
 {
     use HasFactory;
@@ -12,6 +12,12 @@ class User extends Model
     protected $table = 'users';
     public function products() {
         return $this->hasMany('App\Models\Products');
+    }
+    public function carts() {
+        return $this->belongsToMany('App\Models\Cart');
+    }
+    public function wishlists() {
+        return $this->belongsToMany('App\Models\Wishlist');
     }
 
 }

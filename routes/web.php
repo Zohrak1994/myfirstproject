@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
 
 
 Route::get('/', function () {
@@ -26,7 +27,16 @@ Route::post('/register', [RegisterController::class, 'addPerson']);
 Route::get('/add', [ProductController::class, 'showCategories']);
 Route::post('/add', [ProductController::class, 'addProduct']);
 Route::get('/all', [ProductController::class, 'showAllProducts']);
+Route::post('/all', [ProductController::class, 'ajax']);
+
 Route::get('/details/{id}', [ProductController::class, 'details']);
-// Route::get('/details', function () {
-//     return view('product_details');
+Route::post('/search', [ProductController::class, 'headerSearch']);
+Route::post('/update', [ProductController::class, 'updateProduct']);
+Route::get('/shoping-cart', [CartController::class, 'cart']);
+Route::post('/shoping-cart', [CartController::class, 'ajax']);
+
+Route::get('/wishlist', [CartController::class, 'wishlist']);
+Route::post('/wishlist', [CartController::class, 'ajax']);
+// Route::get('/wishlist', function () {
+//     return view('wishlist');
 // });

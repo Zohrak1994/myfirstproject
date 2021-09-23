@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 <!--Less styles -->
    <!-- Other Less css file //different less files has different color scheam
 	<link rel="stylesheet/less" type="text/css" href="themes/less/simplex.less">
@@ -43,8 +44,14 @@
 		<span class="btn btn-mini">En</span>
 		<a href="product_summary.html"><span>&pound;</span></a>
 		<span class="btn btn-mini">$155.00</span>
-		<a href="product_summary.html"><span class="">$</span></a>
-		<a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Itemes in your cart </span> </a> 
+		<a href="{{'/wishlist'}}">
+			<span class="btn btn-mini btn-primary">
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+				<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
+			</svg>  Itemes in your wishlist </span>
+		 </a>
+		<a href="{{'/shoping-cart'}}"><span class="">$</span></a>
+		<a href="{{'/shoping-cart'}}"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i>  Itemes in your cart </span> </a> 
 	</div>
 	</div>
 </div>
@@ -57,15 +64,15 @@
 </a>
   <div class="navbar-inner">
     <a class="brand" href="{{'/'}}"><img src="{{asset('themes/images/logo.png')}}" alt="Bootsshop"/></a>
-		<form class="form-inline navbar-search" method="post" action="products.html" >
-		<input id="srchFld" class="srchTxt" type="text" />
-		  <select class="srchTxt">
-			<option>All</option>
-			<option>CLOTHES </option>
-			<option>FOOD AND BEVERAGES </option>
-			<option>HEALTH & BEAUTY </option>
-			<option>SPORTS & LEISURE </option>
-			<option>BOOKS & ENTERTAINMENTS </option>
+		<form class="form-inline navbar-search" method="post" action="{{'search'}}" >
+			@csrf
+		<input id="srchFld" class="srchTxt" name="headerSearchInput" type="text" />
+		  <select class="srchTxt" name="headerSearchSelect">
+		 
+			<option value="All">All</option>
+			@foreach ($categories as $category)
+				<option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+			@endforeach
 		</select> 
 		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 		  
@@ -165,6 +172,7 @@
 	<script src="{{asset('themes/js/bootshop.js')}}"></script>
     <script src="{{asset('themes/js/jquery.lightbox-0.5.js')}}"></script>
 	<script src="{{asset('themes/js/custom.js')}}"></script>
+	<script src="{{asset('themes/js/cart.js')}}"></script>
 	
 	<!-- Themes switcher section ============================================================================================= -->
 <div id="secectionBox">

@@ -104,14 +104,14 @@
                 </div>
               </div>
                <div class="control-group">
-                <label class="control-label" for="forInp">Images</label>
-                <div class="controls">
-                <label class="control-label btn " style="width: 90px" for="Images" id="forInp" >Select images</label>
-                  <input type="file" class="hidden" id="Images"  name="images[]" accept="image/*" multiple>
-                  @if ($errors->has('images'))
-            	<div style="color:red">{{$errors->first('images')}}</div>
-              @endif
-                </div>
+                  <label class="control-label" for="forInp">Images</label>
+                  <div class="controls">
+                    <label class="control-label btn " style="width: 90px" for="Images" id="forInp" >Select images</label>
+                    <input type="file" class="hidden" id="Images"  name="images[]" accept="image/*" multiple>
+                    @if ($errors->has('images'))
+                    <div style="color:red">{{$errors->first('images')}}</div>
+                      @endif
+                  </div>
 
               </div>
 
@@ -135,7 +135,6 @@
                         @foreach ($categories as $category)
                         <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                          @endforeach
-
                     </select>
                   </div>
                   @if ($errors->has('category'))
