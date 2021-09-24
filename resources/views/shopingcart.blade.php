@@ -117,12 +117,13 @@
 				</tr>
               </thead>
               <tbody>
+			  <input type="hidden" class="products" value="{{$products}}">
 			@foreach($products as $product)
 			
 			
 				<div>
-				<input type="hidden" id="productCount" value="{{ $product['products']['count']}}">
-				<input type="hidden" id="productId" value="{{ $product['products_id']}}">
+				<input type="hidden" class="productCount" value="{{ $product['products']['count']}}">
+				<input type="hidden" class="productId" value="{{ $product['products_id']}}">
 					<tr class="tr">
 					<td> <img width="60" src="{{asset('themes/images/products/'. $product['products']['photos'][0]['photo'])}}" alt=""/></td>
 					<td> {{ $product['products']['name']}}<br/> {{ $product['products']['description']}}</td>
@@ -149,10 +150,11 @@
                   <td colspan="5" style="text-align:right">Total Price:	</td>
                   <td class="label label-important total" style="display:block"> $247.00</td>
                 </tr>
-
+				
 				</tbody>
+				
             </table>
-		
+			
 		
             <table class="table table-bordered">
 			<tbody>
@@ -160,10 +162,11 @@
                   <td> 
 				<form class="form-horizontal">
 				<div class="control-group">
-				<label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
+				<label class="control-label"><strong> Feedback</strong> </label>
 				<div class="controls">
-				<input type="text" class="input-medium" placeholder="CODE">
-				<button type="submit" class="btn"> ADD </button>
+				<input type="text" class="input-medium feedback" placeholder="Feedback">
+				<button class="btn btn-success checkout" type="button">Checkout </button>
+				<p class="errorCheckout" style="color:red"></p>
 				</div>
 				</div>
 				</form>

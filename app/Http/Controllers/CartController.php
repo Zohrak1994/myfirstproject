@@ -12,7 +12,8 @@ use App\Models\Photo;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\Wishlist;
-
+use App\Models\Order;
+use App\Models\Order_details;
 class CartController extends Controller
 {
     public function cart(Request $request){
@@ -75,6 +76,28 @@ class CartController extends Controller
             DB::table('wishlists')
             ->where('products_id', '=',$request->id)
             ->delete(); 
+        }
+        if($request->name == 'checkout'){
+            // return  $request->products;
+            // return  $request->total;
+
+            $orders = new Order;
+            $orders->user_id =$request->session()->get("data")->id;
+            $orders->total = $request->total;
+            $orders->save();
+            foreach($request->products as $product){
+                $order_details = new Order_details;
+                $order_details->products_id =$product['id'];
+                $order_details->orders_id = $orders->id;
+                $order_details->count = $product['count'];
+                $order_details->feedback = $request->feedback;
+                $order_details->save();
+                DB::table('carts')
+                ->where('products_id', '=',$product['id'])
+                ->where('user_id', '=',$request->session()->get("data")->id)
+                ->delete(); 
+
+            }
         }
 
     }

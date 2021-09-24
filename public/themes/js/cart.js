@@ -97,7 +97,7 @@ $('.deleteCart').click(function(){
 
 $('.moveToWishlist').click(function(){
     let id = $(this).data('id')
-    let productId=$(this).parents().find('#productId').val()
+    let productId=$(this).parents().find('.productId').val()
     let tr = $(this).parents(".tr")
     console.log(productId)
     jQuery.ajax({
@@ -119,7 +119,7 @@ $('.moveToWishlist').click(function(){
 })
 $('.moveToCart').click(function(){
     let id = $(this).data('id')
-    let productId=$(this).parents().find('#productId').val()
+    let productId=$(this).parents().find('.productId').val()
     let tr = $(this).parents(".tr")
     jQuery.ajax({
         url: getBaseURL ('wishlist'),
@@ -158,4 +158,51 @@ $('.deleteWishlist').click(function(){
             alert('The item has been deleted')
         }
     });
+})
+// let productsId = []
+// $('.productId').each(function(){
+//     let id = parseInt($(this).val())
+//     productsId.push(id)
+//   });
+//   console.log(productsId)count
+
+$('.checkout').click(function(){
+    $('.errorCheckout').html("")
+    let feedback = $('.feedback').val()
+    let total = $(".total").html()
+    if(feedback==""){
+        feedback="empty"
+    }
+    console.log()
+    let products = []
+    let i=0
+    $('.productId').each(function(){
+        let id = parseInt($(this).val())
+        products.push({'id': id})
+    });
+    $('.count').each(function(){
+        let count = parseInt($(this).html())
+        products[i]['count']=count
+        i++
+    });
+    if(products.length!=0){
+        jQuery.ajax({
+            url: getBaseURL ('shoping-cart'),
+            type: 'POST',
+            data: {
+                name: 'checkout',
+                total:total,
+                products:products,
+                feedback:feedback
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(result){
+                $('.tr').parent().remove()
+            }
+        });
+    }else{
+        $('.errorCheckout').html('Your cart is empty')
+    }
 })
