@@ -2,47 +2,7 @@
 @section('title','SHOPPING CART')
 @section('body')
 <!-- Header End====================================================================== -->
-<div id="mainBody">
-	<div class="container">
-	<div class="row">
-<!-- Sidebar ================================================== -->
-	<div id="sidebar" class="span3">
-		<div class="well well-small"><a id="myCart" href="product_summary.html"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
-		<ul id="sideManu" class="nav nav-tabs nav-stacked">
-			<li class="subMenu open"><a> ELECTRONICS [230]</a>
-				<ul>
-				<li><a class="active" href="products.html"><i class="icon-chevron-right"></i>Cameras (100) </a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Computers, Tablets & laptop (30)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Sound & Vision (15)</a></li>
-				</ul>
-			</li>
-			<li class="subMenu"><a> CLOTHES [840] </a>
-			<ul style="display:none">
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Women's Clothing (45)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Women's Shoes (8)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Women's Hand Bags (5)</a></li>	
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Men's Clothings  (45)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Men's Shoes (6)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Kids Clothing (5)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Kids Shoes (3)</a></li>												
-			</ul>
-			</li>
-			<li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a>
-				<ul style="display:none">
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Angoves  (35)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Bouchard Aine & Fils (8)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>French Rabbit (5)</a></li>	
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Louis Bernard  (45)</a></li>
-				<li><a href="products.html"><i class="icon-chevron-right"></i>BIB Wine (Bag in Box) (8)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Other Liquors & Wine (5)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Garden (3)</a></li>												
-				<li><a href="products.html"><i class="icon-chevron-right"></i>Khao Shong (11)</a></li>												
-			</ul>
-			</li>
-			<li><a href="products.html">HEALTH & BEAUTY [18]</a></li>
-			<li><a href="products.html">SPORTS & LEISURE [58]</a></li>
-			<li><a href="products.html">BOOKS & ENTERTAINMENTS [14]</a></li>
+@include('inc.orders')
 		</ul>
 		<br/>
 		  <div class="thumbnail">
@@ -120,15 +80,15 @@
 			  <input type="hidden" class="products" value="{{$products}}">
 			@foreach($products as $product)
 			
-			
 				<div>
-				<input type="hidden" class="productCount" value="{{ $product['products']['count']}}">
 				<input type="hidden" class="productId" value="{{ $product['products_id']}}">
 					<tr class="tr">
 					<td> <img width="60" src="{{asset('themes/images/products/'. $product['products']['photos'][0]['photo'])}}" alt=""/></td>
 					<td> {{ $product['products']['name']}}<br/> {{ $product['products']['description']}}</td>
 					<td>
 						<div class="input-append">
+							
+						<input type="hidden" class="productCount" value="{{ $product['products']['count']}}">
 							<h6 class="span1">Count:<span id="{{ $product['products']['id']}}" class="count">{{ $product['products']['carts']->count}}</span></h6>
 							<button class="btn minus" type="button" data-count="{{ $product['products']['carts']->count}}" data-id="{{ $product['products']['id']}}"><i class="icon-minus"></i></button>
 							<button class="btn plus" type="button" data-count="{{ $product['products']['carts']->count}}" data-id="{{ $product['products']['id']}}"><i class="icon-plus"></i></button>
@@ -148,33 +108,17 @@
 
                 <tr>
                   <td colspan="5" style="text-align:right">Total Price:	</td>
-                  <td class="label label-important total" style="display:block"> $247.00</td>
+                  <td class="label label-important total" style="display:block"> </td>
+                </tr>
+				<tr>
+                  <td colspan="6" style="text-align:right">
+				  	<button class="btn btn-success checkout" type="button">Checkout </button>
+				  </td>
                 </tr>
 				
 				</tbody>
 				
             </table>
-			
-		
-            <table class="table table-bordered">
-			<tbody>
-				 <tr>
-                  <td> 
-				<form class="form-horizontal">
-				<div class="control-group">
-				<label class="control-label"><strong> Feedback</strong> </label>
-				<div class="controls">
-				<input type="text" class="input-medium feedback" placeholder="Feedback">
-				<button class="btn btn-success checkout" type="button">Checkout </button>
-				<p class="errorCheckout" style="color:red"></p>
-				</div>
-				</div>
-				</form>
-				</td>
-                </tr>
-				
-			</tbody>
-			</table>
 			
 			<table class="table table-bordered">
 			 <tr><th>ESTIMATE YOUR SHIPPING </th></tr>

@@ -19,5 +19,7 @@ class User extends Model
     public function wishlists() {
         return $this->belongsToMany('App\Models\Wishlist');
     }
-
+    public function orders() {
+        return $this->hasMany('App\Models\orders');
+    }
 }

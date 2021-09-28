@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Order;
 
 class RegisterController extends Controller{
 
@@ -57,6 +58,9 @@ class RegisterController extends Controller{
                      if(Hash::check(request('mPassword'), $checkInfo->password)){
                         $request->session()->put('data', $checkInfo);
                         $data = $request->session()->get("data");
+
+                        $orders = Order::all();
+                        $request->session()->put('orders', $orders);
                         // dd($data['name']);
                         return redirect('/');
                      }else{

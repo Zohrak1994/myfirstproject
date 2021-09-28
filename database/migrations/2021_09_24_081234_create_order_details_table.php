@@ -29,7 +29,6 @@ class CreateOrderDetailsTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->integer('count');
-            $table->string('feedback')->NULL;
         });
     }
 

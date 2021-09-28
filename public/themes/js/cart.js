@@ -41,10 +41,9 @@ $('.minus').click(function(){
 $('.plus').click(function(){
     let count=$(this).parent().find('.count').html()
     let id = $(this).data('id')
-    let productCount=$(this).parents().find('#productCount').val()
+    let productCount=+$(this).parent().find('.productCount').val()
     let tihisPrice = +$(this).parent().parent().parent().find(".price").html()
     let tihisPrice1 = $(this).parent().parent().parent().find(".price")
-    // $(this).parent().parent().parent().find("#price").html(tihisPrice+(tihisPrice/count))
     let count1=count
     count++
     if(count>productCount){
@@ -77,6 +76,9 @@ $('.plus').click(function(){
 $('.deleteCart').click(function(){
     let id = $(this).data('id')
     let tr = $(this).parents(".tr")
+    let price =parseInt($(this).parent().parent().parent().find(".price").html())
+    let total = parseInt($('.total').html())
+    console.log(typeof(total))
     console.log(id)
     jQuery.ajax({
         url: getBaseURL ('shoping-cart'),
@@ -90,7 +92,7 @@ $('.deleteCart').click(function(){
           },
         success: function(result){
             tr.remove()
-            alert('The item has been deleted')
+            $('.total').html(total-price)
         }
     });
 })
@@ -99,6 +101,8 @@ $('.moveToWishlist').click(function(){
     let id = $(this).data('id')
     let productId=$(this).parents().find('.productId').val()
     let tr = $(this).parents(".tr")
+    let price =parseInt($(this).parent().parent().parent().find(".price").html())
+    let total = parseInt($('.total').html())
     console.log(productId)
     jQuery.ajax({
         url: getBaseURL ('shoping-cart'),
@@ -113,28 +117,28 @@ $('.moveToWishlist').click(function(){
           },
         success: function(result){
             tr.remove()
+            $('.total').html(total-price)
             alert('The item has been added to your wishlist')
         }
     });
 })
 $('.moveToCart').click(function(){
     let id = $(this).data('id')
-    let productId=$(this).parents().find('.productId').val()
     let tr = $(this).parents(".tr")
     jQuery.ajax({
         url: getBaseURL ('wishlist'),
         type: 'POST',
         data: {
             name: 'moveToCart',
-            productId:productId,
-            id:id,
+            id:id
         },
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           },
         success: function(result){
+            // console.log(result)
             tr.remove()
-            alert('The item has been added to your wishlist')
+            alert('The item has been added to your cart')
         }
     });
 })
@@ -166,19 +170,23 @@ $('.deleteWishlist').click(function(){
 //   });
 //   console.log(productsId)count
 
+
 $('.checkout').click(function(){
     $('.errorCheckout').html("")
-    let feedback = $('.feedback').val()
     let total = $(".total").html()
-    if(feedback==""){
-        feedback="empty"
-    }
-    console.log()
+
+    
     let products = []
     let i=0
     $('.productId').each(function(){
         let id = parseInt($(this).val())
         products.push({'id': id})
+    });
+    let l=0
+    $('.productCount').each(function(){
+        let productCount = parseInt($(this).val())
+        products[l]['productCount']=productCount
+        l++
     });
     $('.count').each(function(){
         let count = parseInt($(this).html())
@@ -192,8 +200,7 @@ $('.checkout').click(function(){
             data: {
                 name: 'checkout',
                 total:total,
-                products:products,
-                feedback:feedback
+                products:products
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

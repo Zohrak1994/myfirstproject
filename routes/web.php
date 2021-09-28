@@ -37,6 +37,9 @@ Route::post('/shoping-cart', [CartController::class, 'ajax']);
 
 Route::get('/wishlist', [CartController::class, 'wishlist']);
 Route::post('/wishlist', [CartController::class, 'ajax']);
-// Route::get('/wishlist', function () {
-//     return view('wishlist');
-// });
+
+Route::get('/wishlist', [OrderController::class, 'orders']);
+
+
+
+

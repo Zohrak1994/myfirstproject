@@ -125,6 +125,8 @@
 </div>
 </div>
 </div>
+
+
 @yield('body')
 <div  id="footerSection">
 	<div class="container">

@@ -15,9 +15,9 @@ use App\Models\Wishlist;
 
 class ProductController extends Controller
 {
+
     public function showCategories(){
         $categories = Categories::all();
-        // View::share('categories', $categories);
        return view("addProduct",['categories' => $categories]);
     }
 
@@ -57,15 +57,13 @@ class ProductController extends Controller
                     $photo->save();
                 }
             }
-               
-            
-            
             return redirect('/all');
          }
 
     }
-
+    
     public function showAllProducts(Request $request){
+        // $orders = session()->get("orders");
         $data = Categories::all();
         $datas =Products::with(['categories','photos'])->paginate(3);
         // $datasUser::paginate(15);
@@ -78,7 +76,27 @@ class ProductController extends Controller
                             ->where('price', '<=', $request->priceOver)
                             ->get();
                 return view("ajax.search",['datas' => $products,'data' => $data  ])->render();
-           }
+           }elseif($request->priceStarting==null && $request->priceOver!=null && $request->name == 'search' ){
+                $products = Products::with(['categories','photos'])
+                            ->where('price', '<=', $request->priceOver)
+                            ->get();
+                return view("ajax.search",['datas' => $products,'data' => $data  ])->render();
+           }elseif($request->priceStarting!=null && $request->priceOver==null && $request->name == 'search' ){
+                $products = Products::with(['categories','photos'])
+                            ->where('price', '>=', $request->priceStarting)
+                            ->get();
+                return view("ajax.search",['datas' => $products,'data' => $data  ])->render();
+            }elseif($request->priceStarting==null && $request->priceOver==null && $request->name == 'search' ){
+                $products = Products::with(['categories','photos'])
+                            ->get();
+                            // dd($products[0]['count']);
+                            foreach($products as $key=>$product){
+                                if($product['count']==0){
+                                    unset($products[$key]);
+                                }
+                            }
+                return view("ajax.search",['datas' => $products,'data' => $data  ])->render();
+            }
         }else{
             return view("allProducts",['datas' => $datas,'data' => $data ,'myproducts' => $myproducts]);
          }
