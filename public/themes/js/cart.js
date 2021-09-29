@@ -9,6 +9,8 @@ function getBaseURL (x) {
    $(".total").html(total)
 
 $('.minus').click(function(){
+    let this_is = $(this)
+    this_is.prop('disabled', true)
     let count=$(this).parent().find('.count').html()
     let count1 = count
     let tr = $(this).parents(".tr")
@@ -32,6 +34,8 @@ $('.minus').click(function(){
             tr.remove()
             }
             $('#'+id).html(count)
+            this_is.prop('disabled', false)
+
             let totalPrice = parseInt($(".total").html())
             $(".total").html(totalPrice-(tihisPrice/count1))
         }
@@ -39,15 +43,18 @@ $('.minus').click(function(){
 })
 
 $('.plus').click(function(){
+    let this_is = $(this)
+    this_is.prop('disabled', true)
     let count=$(this).parent().find('.count').html()
     let id = $(this).data('id')
     let productCount=+$(this).parent().find('.productCount').val()
     let tihisPrice = +$(this).parent().parent().parent().find(".price").html()
+    let itemPrice=tihisPrice/count
     let tihisPrice1 = $(this).parent().parent().parent().find(".price")
-    let count1=count
     count++
     if(count>productCount){
         alert("Not available in the store")
+        this_is.prop('disabled', false)
     }else{
     jQuery.ajax({
         url: getBaseURL ('shoping-cart'),
@@ -64,9 +71,11 @@ $('.plus').click(function(){
             // console.log(result)
             // console.log(count)
             $('#'+id).html(count)
-            tihisPrice1.html(tihisPrice+(tihisPrice/count1))
+            this_is.prop('disabled', false)
+            tihisPrice1.html(tihisPrice+itemPrice)
             let totalPrice = parseInt($(".total").html())
-            $(".total").html(totalPrice+(tihisPrice/count1))
+            $(".total").html(totalPrice+itemPrice)
+            
         }
     });
 }
