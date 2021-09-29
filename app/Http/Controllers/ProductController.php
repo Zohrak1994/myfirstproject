@@ -102,7 +102,7 @@ class ProductController extends Controller
          }
     }
     public function details($id){
-        $thisproduct =Products::with(['categories','photos'])
+        $thisproduct =Products::with(['categories','photos','feedback'])
                     ->where('id','=',$id)
                     ->get();
         return view("product_details",['thisproduct' => $thisproduct]);
@@ -149,8 +149,10 @@ class ProductController extends Controller
     }
 
     public function ajax(Request $request){
-        $productsInCart=Cart::all()->where('products_id', '=' ,$request->id);
-        $productsInWishlist=Wishlist::all()->where('products_id', '=' ,$request->id);
+        $productsInCart=Cart::all()->where('products_id', '=' ,$request->id)
+                        ->where('user_id', '=',$request->session()->get("data")->id);
+        $productsInWishlist=Wishlist::all()->where('products_id', '=' ,$request->id)
+                        ->where('user_id', '=',$request->session()->get("data")->id);
         
             if($request->name == 'addCard'){
                 if($productsInCart->isEmpty()){

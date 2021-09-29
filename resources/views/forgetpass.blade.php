@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title','Home')
+@section('title','All products')
 @section('body')
 <!-- Header End====================================================================== -->
 @include('inc.orders')
@@ -30,51 +30,25 @@
 	<div class="span9">
     <ul class="breadcrumb">
 		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-		<li class="active">Login</li>
+		<li class="active">Forget password?</li>
     </ul>
-	<h3> Login</h3>	
+	<h3> FORGET YOUR PASSWORD?</h3>	
 	<hr class="soft"/>
 	
 	<div class="row">
-		<div class="span4">
+		<div class="span9" style="min-height:900px">
 			<div class="well">
-			<h5>CREATE YOUR ACCOUNT</h5><br/>
-			Enter your e-mail address to create an account.<br/><br/><br/>
-			<form action="register.html">
+			<h5>Reset your password</h5><br/>
+			Please enter the email address for your account. A verification code will be sent to you. Once you have received the verification code, you will be able to choose a new password for your account.<br/><br/><br/>
+			<form>
 			  <div class="control-group">
-				<label class="control-label" for="inputEmail0">E-mail address</label>
+				<label class="control-label" for="inputEmail1">E-mail address</label>
 				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail0" placeholder="Email">
+				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email">
 				</div>
 			  </div>
 			  <div class="controls">
-			  <button type="submit" class="btn block">Create Your Account</button>
-			  </div>
-			</form>
-		</div>
-		</div>
-		<div class="span1"> &nbsp;</div>
-		<div class="span4">
-			<div class="well">
-			<h5>ALREADY REGISTERED ?</h5>
-			<form action="{{'/'}}" method="post">
-			@csrf
-			  <div class="control-group">
-				<label class="control-label" for="inputEmail1">Email</label>
-				<div class="controls">
-				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email" name="mEmail">
-				</div>
-			  </div>
-			  <div class="control-group">
-				<label class="control-label" for="inputPassword1">Password</label>
-				<div class="controls">
-				  <input type="password" class="span3"  id="inputPassword1" placeholder="Password" name="mPassword">
-				</div>
-			  </div>
-			  <div class="control-group">
-				<div class="controls">
-				  <button type="submit" class="btn">Sign in</button> <a href="{{'/forgetpass'}}">Forget password?</a>
-				</div>
+			  <button type="submit" class="btn block">Submit</button>
 			  </div>
 			</form>
 		</div>
@@ -82,7 +56,8 @@
 	</div>	
 	
 </div>
-</div></div>
+</div>
+</div>
 </div>
 <!-- MainBody End ============================= -->
 <!-- Footer ================================================================== -->

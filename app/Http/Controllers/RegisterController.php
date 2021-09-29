@@ -59,8 +59,8 @@ class RegisterController extends Controller{
                         $request->session()->put('data', $checkInfo);
                         $data = $request->session()->get("data");
 
-                        $orders = Order::all();
-                        $request->session()->put('orders', $orders);
+                        // $orders = Order::all();
+                        // $request->session()->put('orders', $orders);
                         // dd($data['name']);
                         return redirect('/');
                      }else{

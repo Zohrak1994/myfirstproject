@@ -9,4 +9,12 @@ class Order_details extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $table = 'order_details';
+    public function products() {
+        return $this->belongsTo('App\Models\Products');
+    }
+    public function orders() {
+        return $this->belongsTo('App\Models\orders');
+    }
+
 }

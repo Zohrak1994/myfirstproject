@@ -5,14 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Wishlist extends Model
+class Feedback extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $table = 'wishlists';
-    public function users() {
-        return $this->belongsTo('App\Models\User');
-    }
+    protected $table = 'feedback';
     public function products() {
         return $this->belongsTo('App\Models\Products');
     }

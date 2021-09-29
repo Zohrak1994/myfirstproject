@@ -19,10 +19,15 @@ class Products extends Model
     public function categories() {
         return $this->belongsTo('App\Models\Categories');
     }
+    public function order_details() {
+        return $this->hasMany('App\Models\Order_details');
+    }
     public function photos() {
         return $this->hasMany('App\Models\Photo');
     }
-
+    public function feedback() {
+        return $this->hasMany('App\Models\Feedback');
+    }
     public function carts() {
         return $this->hasOne('App\Models\Cart');
     }

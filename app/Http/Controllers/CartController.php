@@ -37,21 +37,25 @@ class CartController extends Controller
             if($request->count == 0){
                 DB::table('carts')
                 ->where('products_id', '=',$request->id)
+                ->where('user_id', '=',$request->session()->get("data")->id)
                 ->delete(); 
                 return "deleted";
             }
             DB::table('carts')
             ->where('products_id', '=',$request->id)
+            ->where('user_id', '=',$request->session()->get("data")->id)
             ->update(['count' => $request->count]);
         }
         if($request->name == 'deleteCart'){
             DB::table('carts')
             ->where('products_id', '=',$request->id)
+            ->where('user_id', '=',$request->session()->get("data")->id)
             ->delete(); 
         }
         if($request->name == 'moveToWishlist'){
             DB::table('carts')
             ->where('products_id', '=',$request->id)
+            ->where('user_id', '=',$request->session()->get("data")->id)
             ->delete(); 
 
             $wishlist = new Wishlist; 
@@ -63,6 +67,7 @@ class CartController extends Controller
         if($request->name == 'moveToCart'){
             DB::table('wishlists')
             ->where('products_id', '=',$request->id)
+            ->where('user_id', '=',$request->session()->get("data")->id)
             ->delete(); 
 
             $cart = new Cart; 
@@ -75,6 +80,7 @@ class CartController extends Controller
         if($request->name == 'deleteWishlist'){
             DB::table('wishlists')
             ->where('products_id', '=',$request->id)
+            ->where('user_id', '=',$request->session()->get("data")->id)
             ->delete(); 
         }
         if($request->name == 'checkout'){

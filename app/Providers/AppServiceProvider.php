@@ -3,6 +3,7 @@
 namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use App\Models\Categories;
+use App\Models\Order;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
@@ -27,7 +28,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $categories = Categories::all();
         View::share('categories', $categories);
-        // Paginator::useBootstrap();
+        $orders = Order::all();
+        View::share('orders', $orders);
     }
     
 }

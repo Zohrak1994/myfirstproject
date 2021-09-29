@@ -5,7 +5,7 @@ use App\Http\Controllers\NewController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
-
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     return view('index');
@@ -18,6 +18,9 @@ Route::get('/settings', function () {
 });
 Route::get('/login', function () {
     return view('login');
+});
+Route::get('/forgetpass', function () {
+    return view('forgetpass');
 });
 Route::post('/settings', [RegisterController::class, 'update'])->name('settings');
 Route::post('/uppassword', [RegisterController::class, 'uppassword']);
@@ -38,7 +41,8 @@ Route::post('/shoping-cart', [CartController::class, 'ajax']);
 Route::get('/wishlist', [CartController::class, 'wishlist']);
 Route::post('/wishlist', [CartController::class, 'ajax']);
 
-Route::get('/wishlist', [OrderController::class, 'orders']);
+Route::get('/orders/{id}', [OrderController::class, 'orders']);
+Route::post('/orders', [OrderController::class, 'feedback']);
 
 
 
