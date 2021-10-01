@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ use App\Models\Order;
 class RegisterController extends Controller{
 
 
-
+public $session;
 
 
     public function addPerson(Request $request){
@@ -58,11 +59,14 @@ class RegisterController extends Controller{
                      if(Hash::check(request('mPassword'), $checkInfo->password)){
                         $request->session()->put('data', $checkInfo);
                         $data = $request->session()->get("data");
-
-                        // $orders = Order::all();
+                        $this->session = $data;
+                        // dd($this->session->id);
+                        $this->orders = Order::all()->where('user_id','=',$data->id);
                         // $request->session()->put('orders', $orders);
                         // dd($data['name']);
-                        return redirect('/');
+                        $orders = Order::all();
+                        View::share('orders', $orders);
+                        return redirect('/')->with(['orders' => $this->orders]);
                      }else{
                         $validator->after(function ($validator) use($checkInfo,$request){
                             $validator->errors()->add('mPassword', 'Your password is not valid');

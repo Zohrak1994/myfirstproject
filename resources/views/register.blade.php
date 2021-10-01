@@ -118,6 +118,7 @@
 			</div>
 		</div>		
 	</form>
+	<a href="{{'/login'}}" class="btn btn-large btn-success" type="submit"  value="Register" >Already registered ?</a>
 </div>
 
 </div>

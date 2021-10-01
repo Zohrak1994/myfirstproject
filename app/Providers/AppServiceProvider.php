@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\Order;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use App\Http\Controllers\RegisterController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +29,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $categories = Categories::all();
         View::share('categories', $categories);
-        $orders = Order::all();
+        $control = new RegisterController;
+        $orders = Order::where('user_id', );
         View::share('orders', $orders);
     }
     
