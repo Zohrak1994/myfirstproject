@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Session\CookieSessionHandler;
+use Illuminate\Session\Store;
 use App\Models\User;
 use App\Models\Order;
 
 class RegisterController extends Controller{
 
-
-public $session;
-
+    public static $session_data;
 
     public function addPerson(Request $request){
         $validator=Validator::make($request->all(), [
@@ -58,15 +58,13 @@ public $session;
                    if(isset($checkInfo)){
                      if(Hash::check(request('mPassword'), $checkInfo->password)){
                         $request->session()->put('data', $checkInfo);
-                        $data = $request->session()->get("data");
-                        $this->session = $data;
-                        // dd($this->session->id);
-                        $this->orders = Order::all()->where('user_id','=',$data->id);
-                        // $request->session()->put('orders', $orders);
-                        // dd($data['name']);
-                        $orders = Order::all();
-                        View::share('orders', $orders);
-                        return redirect('/')->with(['orders' => $this->orders]);
+                        $data = $request->session()->get("data")->id;
+                        // parent::$data=$data;
+                        self::$session_data = $data;
+                        dd($data);
+                        // // dd($this->session->id);
+                        // $this->orders = Order::all()->where('user_id','=',$data->id);
+                        return redirect('/');
                      }else{
                         $validator->after(function ($validator) use($checkInfo,$request){
                             $validator->errors()->add('mPassword', 'Your password is not valid');
@@ -133,6 +131,9 @@ public $session;
                         ->withInput(); 
                     }
                 }
+            }
+            public function logout(Request $request){
+                $request->session()->remove("data");
             }
 //dzel sranq
 

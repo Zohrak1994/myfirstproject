@@ -77,6 +77,10 @@
 		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 		  
     </form>
+	<form action="{{'logout'}}"  method="post" >
+	@csrf
+			  <button>logout</button>
+		  </form>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="{{'/all'}}">All products</a></li>
 	 <li class=""><a href="normal.html">Delivery</a></li>

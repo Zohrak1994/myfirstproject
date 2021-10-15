@@ -10,12 +10,13 @@ use App\Http\Controllers\OrderController;
 Route::get('/', function () {
     return view('index');
 });
+// ->middleware('auth')
 Route::get('/register', function () {
     return view('register');
 });
 Route::get('/settings', function () {
     return view('settings');
-});
+}) ;
 Route::get('/login', function () {
     return view('login');
 });
@@ -44,6 +45,9 @@ Route::post('/wishlist', [CartController::class, 'ajax']);
 Route::get('/orders/{id}', [OrderController::class, 'orders']);
 Route::post('/orders', [OrderController::class, 'feedback']);
 
+Route::post('/logout', [RegisterController::class, 'logout']);
 
-
+View::composer('inc.orders', function ($view) {
+    $view->with('orders', OrderController::myOrders());
+});
 

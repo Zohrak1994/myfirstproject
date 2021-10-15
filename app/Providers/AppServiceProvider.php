@@ -29,9 +29,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $categories = Categories::all();
         View::share('categories', $categories);
-        $control = new RegisterController;
-        $orders = Order::where('user_id', );
-        View::share('orders', $orders);
     }
     
 }
