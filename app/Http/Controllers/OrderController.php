@@ -15,14 +15,8 @@ use App\Models\Order;
 use App\Models\Feedback;
 use App\Models\Order_details;
 
-class OrderController extends RegisterController
+class OrderController extends Controller
 {
-    public static function myOrders(){
-        $session=parent::$session_data;
-        // dd($session);
-        $orders = Order::all();
-        return $orders;
-    }
     public function orders(Request $request){
         $products =Order_details::with(['products','products.photos'])
         ->where('orders_id','=',$request['id'])

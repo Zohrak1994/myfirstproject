@@ -18,8 +18,5 @@ class Authenticate extends Middleware
             return route('login');
         }
         // dd($request->session()->get("url")['intended']);
-        else{
-            return route('home');
-        }
     }
 }

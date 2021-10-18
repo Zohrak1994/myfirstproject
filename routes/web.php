@@ -6,10 +6,11 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-
-Route::get('/', function () {
-    return view('index');
-});
+use App\Http\Controllers\HomeController;
+// Route::get('/', function () {
+//     return view('index');
+// });
+Route::get('/', [HomeController::class, 'index']);
 // ->middleware('auth')
 Route::get('/register', function () {
     return view('register');
@@ -47,7 +48,7 @@ Route::post('/orders', [OrderController::class, 'feedback']);
 
 Route::post('/logout', [RegisterController::class, 'logout']);
 
-View::composer('inc.orders', function ($view) {
-    $view->with('orders', OrderController::myOrders());
-});
 
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

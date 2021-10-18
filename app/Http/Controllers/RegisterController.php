@@ -15,8 +15,6 @@ use App\Models\Order;
 
 class RegisterController extends Controller{
 
-    public static $session_data;
-
     public function addPerson(Request $request){
         $validator=Validator::make($request->all(), [
                 'name' => 'required|min:2|max:45',
@@ -59,11 +57,6 @@ class RegisterController extends Controller{
                      if(Hash::check(request('mPassword'), $checkInfo->password)){
                         $request->session()->put('data', $checkInfo);
                         $data = $request->session()->get("data")->id;
-                        // parent::$data=$data;
-                        self::$session_data = $data;
-                        dd($data);
-                        // // dd($this->session->id);
-                        // $this->orders = Order::all()->where('user_id','=',$data->id);
                         return redirect('/');
                      }else{
                         $validator->after(function ($validator) use($checkInfo,$request){
