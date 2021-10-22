@@ -1,5 +1,5 @@
 @extends('layouts.header')
-@section('title','All products')
+@section('title','Send email')
 @section('body')
 <!-- Header End====================================================================== -->
 <div id="mainBody">
@@ -32,14 +32,14 @@
 <!-- Sidebar end=============================================== -->
 	<div class="span9">
     <ul class="breadcrumb">
-		<li><a href="index.html">Home</a> <span class="divider">/</span></li>
+		<li><a href="{{'/login'}}">Login</a> <span class="divider">/</span></li>
 		<li class="active">Forget password?</li>
     </ul>
 	<h3> FORGET YOUR PASSWORD?</h3>	
 	<hr class="soft"/>
 	
 	<div class="row">
-		<div class="span9" style="min-height:900px">
+		<div class="span9 form" style="min-height:900px">
 			<div class="well">
 			<h5>Reset your password</h5><br/>
 			Please enter the email address for your account. A verification code will be sent to you. Once you have received the verification code, you will be able to choose a new password for your account.<br/><br/><br/>
@@ -48,10 +48,11 @@
 				<label class="control-label" for="inputEmail1">E-mail address</label>
 				<div class="controls">
 				  <input class="span3"  type="text" id="inputEmail1" placeholder="Email">
+				  <div class="error"></div>
 				</div>
 			  </div>
 			  <div class="controls">
-			  <button type="submit" class="btn block">Submit</button>
+			  <button type="button" class="btn block sendEmail">Send</button>
 			  </div>
 			</form>
 		</div>

@@ -77,51 +77,18 @@
 		  <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
 		  
     </form>
-	<form action="{{'logout'}}"  method="post" >
-	@csrf
-			  <button>logout</button>
-		  </form>
     <ul id="topMenu" class="nav pull-right">
 	 <li class=""><a href="{{'/all'}}">All products</a></li>
 	 <li class=""><a href="normal.html">Delivery</a></li>
 	 <li class=""><a href="contact.html">Contact</a></li>
 	 <li class="">
-	 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
-	@if($errors->has('mEmail') || $errors->has('mPassword'))
-	<div id="login" class="modal  fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-	@else;
-	<div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
-	@endif
-	 
-		  <div class="modal-header">
-			<button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3>Login Block</h3>
-		  </div>
-		  <div class="modal-body">
-			<form class="form-horizontal loginFrm" action="{{'/'}}" method="post">
-				@csrf
-			  <div class="control-group">								
-				<input type="text" id="inputEmail" placeholder="Email" name="mEmail">
-			  </div>
-			  @if ($errors->has('mEmail'))
-            	<div style="color:red" class="error">{{$errors->first('mEmail')}}</div>
-              @endif
-			  <div class="control-group">
-				<input type="password" id="inputPassword" placeholder="Password" name="mPassword">
-			  </div>
-			  @if ($errors->has('mPassword'))
-            	<div style="color:red" class="error">{{$errors->first('mPassword')}}</div>
-              @endif
-			  <div class="control-group">
-				<label class="checkbox">
-				<input type="checkbox"> Remember me
-				</label>
-			  </div>
-			  <button class="btn btn-success">Sign in</button>
-			</form>		
-			
-			<button class="btn modalClose" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
+
+
+	 @if($Auth === false)
+		@include('inc.login')
+		@else
+		@include('inc.logout')
+		@endif
 	</div>
 	</li>
     </ul>
@@ -132,6 +99,9 @@
 
 
 @yield('body')
+<?php
+		print_r($Auth);
+		?>
 <div  id="footerSection">
 	<div class="container">
 		<div class="row">

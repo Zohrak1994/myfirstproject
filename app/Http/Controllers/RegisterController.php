@@ -127,9 +127,8 @@ class RegisterController extends Controller{
             }
             public function logout(Request $request){
                 $request->session()->remove("data");
+                return view('login');
             }
 //dzel sranq
-
-
-                
+              
 }

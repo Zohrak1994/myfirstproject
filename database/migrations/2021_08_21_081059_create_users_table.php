@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration
             $table->integer('age');
             $table->string('email');
             $table->string('password');
+            $table->integer('email_code')->nullable()->unique();
+            
         });
     }
 

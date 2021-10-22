@@ -74,8 +74,9 @@
 <!-- Sidebar ================================================== -->
 	<div id="sidebar" class="span3">
 		<div class="well well-small"><a id="myCart" href="product_summary.html"><img src="{{asset('themes/images/ico-cart.png')}}" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
+		@if(isset($orders))
 		@include('inc.orders')
-
+		@endif
 
 		  <div class="thumbnail">
 			<img src="themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera"/>
