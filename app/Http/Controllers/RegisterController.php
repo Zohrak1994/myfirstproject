@@ -42,7 +42,7 @@ class RegisterController extends Controller{
                $user->email =$request['email'];
                $user->password = Hash::make($request['password']);
                $user->save();
-               
+               $user->assignRole('user');
                return redirect('/login');
             }
               

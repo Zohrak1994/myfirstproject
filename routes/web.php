@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\Auth;
 use App\Http\Middleware\Authenticate;
 use App\Http\Controllers\ForgetPassController;
+use Illuminate\Support\Facades\Redirect;
+
 Route::name('user.')->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth');
      
@@ -50,3 +52,14 @@ View::composer('layouts.header', function ($view) {
     $auth =new Auth;
     $view->with('Auth', $auth->check());
 });
+
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/admin', function () {
+        return view('admin');
+    })->name('admin')->middleware('auth');
+    
+    Route::get('/admin{any}', function () {
+        return Redirect('admin');
+    })->where('any',".*")->middleware('auth');
+});
+

@@ -36,7 +36,13 @@
 <div id="header">
 <div class="container">
 <div id="welcomeLine" class="row">
+	
+	@if($Auth === false)
 	<div class="span6">Welcome!<strong>Guest</strong></div>
+		@else
+		@include('inc.user')
+		@endif
+
 	<div class="span6">
 	<div class="pull-right">
 		<a href="product_summary.html"><span class="">Fr</span></a>
@@ -99,9 +105,7 @@
 
 
 @yield('body')
-<?php
-		print_r($Auth);
-		?>
+
 <div  id="footerSection">
 	<div class="container">
 		<div class="row">

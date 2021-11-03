@@ -1,0 +1,1 @@
+<div class="span6">Welcome!<strong>User</strong></div>

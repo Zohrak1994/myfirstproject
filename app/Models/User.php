@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Permission\Traits\HasRoles;
 use Eloquent;
 class User extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles;
     public $timestamps = false;
     protected $table = 'users';
     public function products() {
